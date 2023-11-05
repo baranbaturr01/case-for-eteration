@@ -1,10 +1,17 @@
 import {Injectable} from '@nestjs/common';
 import axios from "axios";
+import {ConfigService} from "@nestjs/config";
 
 @Injectable()
 export class TmdbService {
-    private readonly apiKey = '4a769b2f0088542f557893235e736271'
-    private readonly token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTc2OWIyZjAwODg1NDJmNTU3ODkzMjM1ZTczNjI3MSIsInN1YiI6IjY1NDYwYTM2ZmQ0ZjgwMDEwMWI1N2E3NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YvCEZZWZ8CEbj09YgTBMcua1Z-mQvPp-eJ5dGiMs9ds'
+    private readonly apiKey: string
+    private readonly token: string
+
+    constructor(private readonly configService: ConfigService) {
+        this.apiKey = this.configService.get<string>('TMDB_API_KEY');
+        this.token = this.configService.get<string>('TMDB_TOKEN');
+
+    }
 
     async fetchMovies() {
         try {

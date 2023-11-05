@@ -5,12 +5,14 @@ import {MoviesController} from './movies.controller';
 import {TmdbService} from './tmdb/tmdb.service';
 import {MovieSchema} from "./schemas/movie.schema";
 import {MovieDetailsSchema} from "./schemas/movie-details.schema";
-import { MoviesResolver } from './movies.resolver';
+import {MoviesResolver} from './movies.resolver';
+import {ConfigModule} from "@nestjs/config";
 
 @Module({
     imports: [
         MongooseModule.forFeature([{name: 'Movie', schema: MovieSchema}]),
         MongooseModule.forFeature([{name: 'MovieDetail', schema: MovieDetailsSchema}]),
+        ConfigModule.forRoot()
     ],
     controllers: [
         MoviesController,

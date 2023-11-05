@@ -5,6 +5,7 @@ import {MoviesModule} from './movies/movies.module';
 import {MongooseModule} from "@nestjs/mongoose";
 import {GraphQLModule} from "@nestjs/graphql";
 import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo";
+import {ConfigModule} from "@nestjs/config";
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo";
             driver: ApolloDriver,
             playground: true,
         }),
+        ConfigModule.forRoot()
     ],
     controllers: [AppController],
     providers: [AppService],

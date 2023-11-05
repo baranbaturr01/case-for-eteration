@@ -53,6 +53,13 @@ npm run start
 http://localhost:3005
 ```
 
+7. .env Adında bir dosya oluşturun ve içerisine aşağıdaki bilgileri girin:
+
+```bash
+TMDB_API_KEY=4a769b2f0088542f557893235e736271
+TMDB_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTc2OWIyZjAwODg1NDJmNTU3ODkzMjM1ZTczNjI3MSIsInN1YiI6IjY1NDYwYTM2ZmQ0ZjgwMDEwMWI1N2E3NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YvCEZZWZ8CEbj09YgTBMcua1Z-mQvPp-eJ5dGiMs9ds
+```
+
 ## API Kullanımı
 
 ## Swagger Belgesi

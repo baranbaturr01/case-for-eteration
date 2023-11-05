@@ -1,9 +1,9 @@
 import {Test, TestingModule} from '@nestjs/testing';
-import {MoviesService} from './movies.service';
+import {MoviesService} from '../src/movies/movies.service';
 import {Model} from "mongoose";
-import {MovieDocument} from "./entity/movie.entity";
+import {MovieDocument} from "../src/movies/entity/movie.entity";
 import {getModelToken} from "@nestjs/mongoose";
-import {TmdbService} from "./tmdb/tmdb.service";
+import {TmdbService} from "../src/movies/tmdb/tmdb.service";
 
 describe('MoviesService', () => {
     let service: MoviesService;

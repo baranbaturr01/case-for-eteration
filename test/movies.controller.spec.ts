@@ -1,9 +1,9 @@
 import {Test, TestingModule} from '@nestjs/testing';
-import {MoviesController} from './movies.controller';
-import {MoviesService} from "./movies.service";
-import {TmdbService} from "./tmdb/tmdb.service";
-import {MovieDetail} from "./entity/movie-detail.entity";
-import {Movie} from "./entity/movie.entity";
+import {MoviesController} from '../src/movies/movies.controller';
+import {MoviesService} from "../src/movies/movies.service";
+import {TmdbService} from "../src/movies/tmdb/tmdb.service";
+import {MovieDetail} from "../src/movies/entity/movie-detail.entity";
+import {Movie} from "../src/movies/entity/movie.entity";
 import {getModelToken} from "@nestjs/mongoose";
 import {NotFoundException} from "@nestjs/common";
 
@@ -115,7 +115,7 @@ describe('MoviesController', () => {
 
     describe('removeById', () => {
         it('should remove a movie by ID', async () => {
-            const movieId = '6546575d4309de1b89639be9'; // Provide a valid movie ID
+            const movieId = '6546575d4309de1b89639be9';
             const removedMovie: Movie = {
                 id: movieId,
                 title: 'Removed Movie',
@@ -130,7 +130,7 @@ describe('MoviesController', () => {
                 video: false,
                 release_date: 'release_date',
                 genre_ids: [1, 2, 3]
-            }; // Mock the removed movie as needed
+            };
             jest.spyOn(service, 'removeById').mockResolvedValue(removedMovie);
 
             const result = await controller.removeById(movieId);

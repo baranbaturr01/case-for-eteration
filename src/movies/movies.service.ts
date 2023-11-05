@@ -16,45 +16,71 @@ export class MoviesService {
 
     async saveMoviesToDatabase() {
 
-        const movies = await this.tmdbService.fetchMovies();
-        //     save to mongodb
-        const saveToMongoDb = await this.movieModel.insertMany(movies);
+        try {
+            const movies = await this.tmdbService.fetchMovies();
+            const saveToMongoDb = await this.movieModel.insertMany(movies);
 
-        if (!saveToMongoDb) {
-            return {
-                success: false,
-                message: 'Movies could not be saved to database'
+            if (!saveToMongoDb) {
+                return {
+                    success: false,
+                    message: 'Movies could not be saved to database'
+                }
             }
+            return saveToMongoDb
+        } catch (e) {
+            throw new Error('Movies could not be saved to database');
         }
-        return saveToMongoDb
+
     }
 
     async findAll(): Promise<Movie[]> {
-        return await this.movieModel.find().exec();
+        try {
+            return await this.movieModel.find().exec();
+
+        } catch (e) {
+            throw new Error('Movies could not be found');
+        }
     }
 
     async findById(id: string): Promise<Movie> {
-        return await this.movieModel.findOne({_id: id}).exec();
+        try {
+            return await this.movieModel.findOne({_id: id}).exec();
+        } catch (e) {
+            throw new Error('Movie could not be found');
+        }
     }
 
     async create(movieData: Movie): Promise<Movie> {
-        const createdMovie = new this.movieModel(movieData);
-        return await createdMovie.save();
+        try {
+            const createdMovie = new this.movieModel(movieData);
+            return await createdMovie.save();
+        } catch (e) {
+            throw new Error('Movie could not be saved to database');
+        }
+
     }
 
 
     async removeById(id: string): Promise<Movie> {
-        return await this.movieModel.findByIdAndRemove({_id: id}).exec();
+        try {
+            return await this.movieModel.findByIdAndRemove({_id: id}).exec();
+        } catch (e) {
+            throw new Error('Movie could not be removed from database');
+        }
     }
 
     async fetchAndPersistMovieDetails(movieId: number): Promise<MovieDetail> {
-        const tmdbMovieDetails = await this.tmdbService.fetchMovieDetailsFromTmdb(movieId);
-        const movieDetails = this.mapTmdbMovieDetailsToMovieDetails(tmdbMovieDetails);
-        const savedMovieDetails = await this.movieDetailsModel.create(movieDetails);
-        if (!savedMovieDetails) {
+        try {
+            const tmdbMovieDetails = await this.tmdbService.fetchMovieDetailsFromTmdb(movieId);
+            const movieDetails = this.mapTmdbMovieDetailsToMovieDetails(tmdbMovieDetails);
+            const savedMovieDetails = await this.movieDetailsModel.create(movieDetails);
+            if (!savedMovieDetails) {
+                throw new Error('Movie details could not be saved to database');
+            }
+            return movieDetails;
+        } catch (e) {
             throw new Error('Movie details could not be saved to database');
         }
-        return movieDetails;
     }
 
     private mapTmdbMovieDetailsToMovieDetails(tmdbDetails): MovieDetail {

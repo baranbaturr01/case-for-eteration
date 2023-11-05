@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  mongodb:
+    image: mongo:3.6.3
+    container_name: mongodb-container
+    ports:
+      - 30055:27017
+    volumes:
+      - ./data:/data/db
+    environment:
+      username: root
+      password: root
+
+volumes:
+  data:

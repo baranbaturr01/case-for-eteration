@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Movie {
+  id: String!
+  title: String!
+  adult: Boolean!
+  poster_path: String!
+  backdrop_path: String!
+  original_language: String!
+  overview: String!
+  popularity: Float!
+  vote_average: Float!
+  vote_count: Float!
+  video: Boolean!
+  release_date: String!
+  genre_ids: [Float!]!
+}
+
+type Query {
+  movies(id: String!): [Movie!]!
+}

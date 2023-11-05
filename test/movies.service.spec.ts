@@ -232,9 +232,9 @@ describe('MoviesService', () => {
             };
             movieModel.findByIdAndRemove = jest.fn().mockResolvedValue(mockMovie);
 
-            const result = await service.removeById('1');
+            const result = await service.removeById('6546575d4309de1b89639be9');
 
-            expect(movieModel.findByIdAndRemove).toBeCalledTimes(1);
+            expect(movieModel.findOneAndRemove).toBeCalledTimes(1);
             expect(result).toEqual(mockMovie);
         });
     });
